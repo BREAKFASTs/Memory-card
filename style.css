@@ -12,7 +12,35 @@ GLOBAL STYLES
 /* -------------------------
 START SCREEN DESIGN
 ------------------------- */
+.main-menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #333;
+    color: #fff;
+}
 
+.title {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.buttons:hover {
+    cursor: pointer;
+}
 
 /* -------------------------
 GAME SCREEN DESIGN
@@ -20,17 +48,103 @@ GAME SCREEN DESIGN
 
 
 /* Timer bar styles */
-
+.time {
+    background-color: #333;
+    color: #fff;
+    margin-top: 10px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 20px;
+    text-align: center;
+}
 
 /* Score + difficulty label */
+.score-combo-time {
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+    align-items: center;
+    justify-content: center;
+}
 
+.score {
+    background-color: #333;
+    color: #fff;
+    margin-top: 10px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 20px;
+    text-align: center;
+}
+
+.combo {
+    background-color: #333;
+    color: #fff;
+    margin-top: 10px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 20px;
+    text-align: center;
+}
+
+.timer {
+    background-color: #333;
+    color: #fff;
+    margin-top: 10px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 20px;
+    text-align: center;
+}
 
 /* Card grid layout */
+.game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    width: 100px;
+    height: 100px;
+    background-color: gray;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-template-rows: repeat(3, 120px);
+    gap: 10px;
+}
+
 
 
 /* -------------------------
 GAME OVER SCREEN
 ------------------------- */
+
+.game-over-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #333;
+    color: #fff;
+}
+
+.text
+{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
 
 
 /* -------------------------
