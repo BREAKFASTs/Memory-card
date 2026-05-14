@@ -38,6 +38,21 @@ START SCREEN DESIGN
     gap: 10px;
 }
 
+.buttons button {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 24px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 13px;
+    background-color: #fff;
+    color: #333;
+    width: 200px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .buttons:hover {
     cursor: pointer;
 }
