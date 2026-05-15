@@ -11,6 +11,8 @@
         <div class="main-menu-container">
             <div class="title">
                 <h1>MEMORY RUSH</h1>
+
+                <p class="paragraph">A project made by Team 3</p>
             </div>
 
             <div class="cards-in-menu">
@@ -21,88 +23,93 @@
 
             <div class="buttons">
                 <div class="start">
-                    <button onclick="location.href='game.html'">▶ PLAY</button>
+                    <button class="button button-primary" onclick="beginGame()">▶ PLAY</button>
                 </div>
                 <div class="options">
-                    <button onclick="location.href='options.html'">⚙ OPTIONS</button>
+                    <button class="button button-secondary" onclick="showOptions()">⚙ OPTIONS</button>
                 </div>
                 <div class="howtoplay">
-                    <button onclick="location.href='howtoplay.html'">❓ HOW TO PLAY</button>
+                    <button class="button button-tertiary" onclick="showHowToPlay()">❓ HOW TO</button>
                 </div>
                 <div class="exit">
-                    <button onclick="location.href='exit.html'">✖ EXIT</button>
+                    <button class="button button-quaternarry" onclick="exitGame()">✖ EXIT</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="score-combo-time">
-        <div class="score">
-            <h1>Score: 0</h1>
+    <section class="memory-card-game-screen" id="screen">
+        <div class="score-combo-time">
+            <div class="score">
+                <h3>Score</h3>
+                <p>0</p>
+            </div>
+
+            <div class="combo">
+                <h3>Combo</h3>
+                <p>0</p>
+            </div>
+
+            <div class="timer">
+                <h3>Time</h3>
+                <p>5:00</p>
+            </div>
         </div>
 
-        <div class="combo">
-            <h1>Combo: 0</h1>
-        </div>
-
-        <div class="timer">
-            <h1>Time: 1:00</h1>
-        </div>
-    </div>
-    
-    <div class="game">
-        <div class="game-container">
-            <div class="grid">
-                <div class="card">
-                    <div class="card-back">
-                        <h1>?</h1>
+        <div class="game">
+            <div class="game-container">
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-back">
+                            <h1>?</h1>
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-back">
-                        <h1>?</h1>
+                    <div class="card">
+                        <div class="card-back">
+                            <h1>?</h1>
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-back">
-                        <h1>?</h1>
+                    <div class="card">
+                        <div class="card-back">
+                            <h1>?</h1>
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-back">
-                        <h1>?</h1>
+                    <div class="card">
+                        <div class="card-back">
+                            <h1>?</h1>
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-back">
-                        <h1>?</h1>
+                    <div class="card">
+                        <div class="card-back">
+                            <h1>?</h1>
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-back">
-                        <h1>?</h1>
+                    <div class="card">
+                        <div class="card-back">
+                            <h1>?</h1>
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-back">
-                        <h1>?</h1>
+                    <div class="card">
+                        <div class="card-back">
+                            <h1>?</h1>
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-back">
-                        <h1>?</h1>
+                    <div class="card">
+                        <div class="card-back">
+                            <h1>?</h1>
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-back">
-                        <h1>?</h1>
+                    <div class="card">
+                        <div class="card-back">
+                            <h1>?</h1>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="game-over-container">
+    <div class="game-over-container" id="screen">
         <div class="text">
             <h1>GAME OVER</h1>
         </div>
