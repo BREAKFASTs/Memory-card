@@ -1,126 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Rush</title>
     <link rel="stylesheet" href="style.css">
-    <title>Memory Card</title>
 </head>
+
 <body>
-    <section class="menu">
-        <div class="main-menu-container">
-            <div class="title">
-                <h1>MEMORY RUSH</h1>
 
-                <p class="paragraph">A project made by Team 3</p>
-            </div>
-
-            <div class="cards-in-menu">
-                <div class="menu-card">?</div>
-                <div class="menu-card">🎸</div>
-                <div class="menu-card">?</div>
-            </div>
-
-            <div class="buttons">
-                <div class="start">
-                    <button class="button button-primary" onclick="beginGame()">▶ PLAY</button>
-                </div>
-                <div class="options">
-                    <button class="button button-secondary" onclick="showOptions()">⚙ OPTIONS</button>
-                </div>
-                <div class="howtoplay">
-                    <button class="button button-tertiary" onclick="showHowToPlay()">❓ HOW TO</button>
-                </div>
-                <div class="exit">
-                    <button class="button button-quaternary" onclick="exitGame()">✖ EXIT</button>
-                </div>
-            </div>
-        </div>
+    <!-- MENU -->
+    <section class="menu" id="menu">
+        <h1>MEMORY RUSH</h1>
+        <p>Train your memory under pressure</p>
+        <button onclick="startGame()">PLAY</button>
     </section>
 
-    <section class="memory-card-game-screen" id="screen">
-        <div class="score-combo-time">
-            <div class="score">
-                <h3>Score</h3>
-                <p>0</p>
-            </div>
+    <!-- GAME -->
+    <section id="gameScreen">
 
-            <div class="combo">
-                <h3>Combo</h3>
-                <p>0</p>
-            </div>
-
-            <div class="timer">
-                <h3>Time</h3>
-                <p>5:00</p>
-            </div>
+        <div class="hud">
+            <div>Score: <span id="score">0</span></div>
+            <div>Pairs: <span id="pairs">0</span></div>
+            <div>Level: <span id="level">Easy</span></div>
+            <div>Time: <span id="time">30</span></div>
+            <div>Best: <span id="best">0</span></div>
         </div>
 
-        <div class="game">
-            <div class="game-container">
-                <div class="grid">
-                    <div class="card">
-                        <div class="card-back">
-                            <h1>?</h1>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-back">
-                            <h1>?</h1>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-back">
-                            <h1>?</h1>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-back">
-                            <h1>?</h1>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-back">
-                            <h1>?</h1>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-back">
-                            <h1>?</h1>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-back">
-                            <h1>?</h1>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-back">
-                            <h1>?</h1>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-back">
-                            <h1>?</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="board" id="board"></div>
     </section>
 
-    <div class="game-over-container" id="screen">
-        <div class="text">
-            <h1>GAME OVER</h1>
-        </div>
-        <div class="message">
-            <p>You have lost the game.</p>
-        </div>
-        <div class="buttons">
-            <button onclick="location.href='start.html'">Try Again</button>
-        </div>
-    </div>
+    <!-- GAME OVER -->
+    <section id="gameOver">
+        <h1>GAME OVER</h1>
+        <p>Score: <span id="finalScore"></span></p>
+        <p>Pairs: <span id="finalPairs"></span></p>
+        <p>Level Reached: <span id="finalLevel"></span></p>
+        <p>Total Time Added: <span id="finalTime"></span></p>
+
+        <button onclick="restart()">REPLAY</button>
+    </section>
 
     <script src="game.js"></script>
 </body>
+
 </html>
