@@ -5,44 +5,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memory Rush</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
 
     <!-- MENU -->
     <section class="menu" id="menu">
-        <h1>MEMORY RUSH</h1>
-        <p>Train your memory under pressure</p>
-        <button onclick="startGame()">PLAY</button>
+
+        <div class="menu-box">
+
+            <div class="logo">🧠</div>
+
+            <h1>MEMORY RUSH</h1>
+            <p>Train your memory under pressure</p>
+
+            <div class="preview-cards">
+                <div class="preview-card">🍓</div>
+                <div class="preview-card">🍉</div>
+                <div class="preview-card">🍇</div>
+            </div>
+
+            <button onclick="startGame()">PLAY NOW</button>
+
+        </div>
+
     </section>
 
     <!-- GAME -->
     <section id="gameScreen">
 
         <div class="hud">
-            <div>Score: <span id="score">0</span></div>
-            <div>Pairs: <span id="pairs">0</span></div>
-            <div>Level: <span id="level">Easy</span></div>
-            <div>Time: <span id="time">30</span></div>
-            <div>Best: <span id="best">0</span></div>
+
+            <div class="hud-box">
+                <div class="hud-title">SCORE</div>
+                <div class="hud-value" id="score">0</div>
+            </div>
+
+            <div class="hud-box">
+                <div class="hud-title">PAIRS</div>
+                <div class="hud-value" id="pairs">0</div>
+            </div>
+
+            <div class="hud-box">
+                <div class="hud-title">LEVEL</div>
+                <div class="hud-value" id="level">Easy</div>
+            </div>
+
+            <div class="hud-box timer-box">
+                <div class="hud-title">TIME</div>
+                <div class="hud-value" id="time">30</div>
+            </div>
+
+            <div class="hud-box">
+                <div class="hud-title">BEST</div>
+                <div class="hud-value" id="best">0</div>
+            </div>
+
         </div>
 
         <div class="board" id="board"></div>
+
     </section>
 
     <!-- GAME OVER -->
     <section id="gameOver">
-        <h1>GAME OVER</h1>
-        <p>Score: <span id="finalScore"></span></p>
-        <p>Pairs: <span id="finalPairs"></span></p>
-        <p>Level Reached: <span id="finalLevel"></span></p>
-        <p>Total Time Added: <span id="finalTime"></span></p>
 
-        <button onclick="restart()">REPLAY</button>
+        <div class="over-box">
+
+            <h1>GAME OVER</h1>
+
+            <div class="stats">
+
+                <div class="stat">
+                    <div class="stat-title">FINAL SCORE</div>
+                    <div class="stat-value" id="finalScore"></div>
+                </div>
+
+                <div class="stat">
+                    <div class="stat-title">PAIRS FOUND</div>
+                    <div class="stat-value" id="finalPairs"></div>
+                </div>
+
+                <div class="stat">
+                    <div class="stat-title">LEVEL REACHED</div>
+                    <div class="stat-value" id="finalLevel"></div>
+                </div>
+
+                <div class="stat">
+                    <div class="stat-title">TOTAL BONUS TIME</div>
+                    <div class="stat-value" id="finalTime"></div>
+                </div>
+
+            </div>
+
+            <button onclick="restart()">PLAY AGAIN</button>
+
+        </div>
+
     </section>
 
     <script src="game.js"></script>
+
 </body>
 
 </html>
