@@ -190,19 +190,65 @@ function checkLevelUp() {
 }
 
 // =====================
-// SHUFFLE
+// SMOOTH SHUFFLE
 // =====================
 function shuffleCards() {
 
+  lock = true;
+
   let cards = Array.from(document.querySelectorAll(".card"));
 
-  cards.sort(() => Math.random() - 0.5);
+  // add shuffle animation
+  cards.forEach((card, index) => {
 
-  board.innerHTML = "";
+    card.style.transition =
+      "transform .45s ease, opacity .45s ease";
 
-  cards.forEach(card => board.appendChild(card));
+    // random movement
+    let x = (Math.random() * 80) - 40;
+    let y = (Math.random() * 80) - 40;
+    let rotate = (Math.random() * 30) - 15;
+
+    card.style.transform =
+      `translate(${x}px, ${y}px) rotate(${rotate}deg) scale(.7)`;
+
+    card.style.opacity = "0";
+  });
+
+  // after animation
+  setTimeout(() => {
+
+    // shuffle array
+    cards.sort(() => Math.random() - 0.5);
+
+    board.innerHTML = "";
+
+    cards.forEach(card => {
+
+      // reset before adding back
+      card.style.transform =
+        "translate(0px, 0px) rotate(0deg) scale(.5)";
+
+      card.style.opacity = "0";
+
+      board.appendChild(card);
+
+      // force browser repaint
+      card.offsetHeight;
+
+      // smooth pop in
+      card.style.transform =
+        "translate(0px, 0px) rotate(0deg) scale(1)";
+
+      card.style.opacity = "1";
+    });
+
+    setTimeout(() => {
+      lock = false;
+    }, 450);
+
+  }, 450);
 }
-
 // =====================
 // FADE EFFECT
 // =====================
