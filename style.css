@@ -1,6 +1,3 @@
-/* =========================
-GLOBAL RESET
-========================= */
 * {
     margin: 0;
     padding: 0;
@@ -11,515 +8,115 @@ GLOBAL RESET
 body {
     min-height: 100vh;
     overflow: hidden;
-    background:
-        radial-gradient(circle at top, #312e81 0%, #171717 45%),
-        linear-gradient(135deg, #111827, #1e1b4b);
+    background: radial-gradient(circle at top, #312e81 0%, #171717 45%);
     color: white;
 }
 
-/* =========================
-MENU SCREEN
-========================= */
+/* MENU */
 .menu {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    overflow: hidden;
-}
-
-/* smoother shuffle */
-.card {
-    will-change: transform;
-    backface-visibility: hidden;
-}
-
-/* =========================
-SHUFFLE ANIMATION
-========================= */
-
-.card.shuffle-out {
-    animation: shuffleOut .25s forwards;
-}
-
-.card.shuffle-in {
-    animation: shuffleIn .35s forwards;
-}
-
-@keyframes shuffleOut {
-
-    0% {
-        transform: scale(1) rotate(0deg);
-        opacity: 1;
-    }
-
-    20% {
-        transform: translateX(-6px) rotate(-6deg);
-    }
-
-    40% {
-        transform: translateX(6px) rotate(6deg);
-    }
-
-    60% {
-        transform: translateX(-6px) rotate(-6deg);
-    }
-
-    100% {
-        transform: scale(.3) rotate(18deg);
-        opacity: 0;
-    }
-}
-
-@keyframes shuffleIn {
-
-    0% {
-        transform: scale(.2);
-        opacity: 0;
-    }
-
-    60% {
-        transform: scale(1.12);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-/* floating cards background */
-.menu::before,
-.menu::after {
-    content: "";
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: 50%;
-    filter: blur(40px);
-}
-
-.menu::before {
-    top: -180px;
-    left: -120px;
-}
-
-.menu::after {
-    bottom: -180px;
-    right: -120px;
 }
 
 .menu-box {
     width: 360px;
     padding: 35px;
-
     border-radius: 24px;
-
     background: rgba(255, 255, 255, 0.08);
-    
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    box-shadow:
-        0 0 30px rgba(0, 0, 0, 0.3),
-        inset 0 0 20px rgba(255, 255, 255, 0.03);
-
     text-align: center;
-
-    position: relative;
-    z-index: 5;
 }
 
 .logo {
     font-size: 52px;
-    margin-bottom: 8px;
 }
 
 .menu h1 {
-    font-size: 42px;
-    letter-spacing: 2px;
-    font-weight: 700;
-}
-
-.menu p {
-    margin-top: 10px;
-    opacity: 0.75;
-    font-size: 14px;
-}
-
-/* preview cards */
-.preview-cards {
-    margin-top: 30px;
-
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-}
-
-.preview-card {
-    width: 60px;
-    height: 70px;
-
-    border-radius: 14px;
-
-    background:
-        linear-gradient(145deg,
-            rgba(255, 255, 255, 0.12),
-            rgba(255, 255, 255, 0.04));
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 26px;
-
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
-
-    animation: float 3s infinite ease-in-out;
-}
-
-.preview-card:nth-child(2) {
-    animation-delay: .5s;
-}
-
-.preview-card:nth-child(3) {
-    animation-delay: 1s;
-}
-
-@keyframes float {
-
-    0%,
-    100% {
-        transform: translateY(0px);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
+    font-size: 40px;
 }
 
 .menu button {
-    margin-top: 28px;
-
+    margin-top: 15px;
     width: 100%;
     padding: 14px;
-
     border: none;
     border-radius: 14px;
-
     background: linear-gradient(135deg, #7c3aed, #4f46e5);
     color: white;
-
-    font-size: 15px;
-    font-weight: 600;
-
     cursor: pointer;
-
-    transition: .2s ease;
 }
 
-.menu button:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 10px 25px rgba(124, 58, 237, .4);
+.how-btn {
+    background: linear-gradient(135deg, #0ea5e9, #6366f1);
 }
 
-/* =========================
-GAME SCREEN
-========================= */
+/* GAME */
 #gameScreen {
     display: none;
     height: 100vh;
-
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    gap: 16px;
-
-    padding: 18px;
 }
 
-/* =========================
-HUD
-========================= */
-.hud {
-    width: 95%;
-    max-width: 920px;
-
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-
-    gap: 12px;
-}
-
-.hud-box {
-    background: rgba(255, 255, 255, 0.08);
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    border-radius: 18px;
-
-    padding: 14px 10px;
-
-    text-align: center;
-
-   
-
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
-}
-
-.hud-title {
-    font-size: 11px;
-    opacity: .7;
-    letter-spacing: 1px;
-}
-
-.hud-value {
-    margin-top: 6px;
-    font-size: 22px;
-    font-weight: 700;
-}
-
-/* timer special */
-.timer-box {
-    background:
-        linear-gradient(145deg,
-            rgba(239, 68, 68, 0.2),
-            rgba(255, 255, 255, 0.06));
-}
-
-/* =========================
-BOARD
-========================= */
 .board {
-    background: rgba(255, 255, 255, 0.05);
-
-    border: 1px solid rgba(255, 255, 255, 0.06);
-
-    border-radius: 24px;
-
-    padding: 18px;
-
     display: grid;
     gap: 10px;
-
-    justify-content: center;
-
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, .3);
-
-    max-width: 90vw;
+    padding: 18px;
 }
 
-/* dynamic columns */
-.board.easy {
-    grid-template-columns: repeat(4, 72px);
-}
-
-.board.normal {
-    grid-template-columns: repeat(4, 72px);
-}
-
-.board.hard {
-    grid-template-columns: repeat(5, 70px);
-}
-
-.board.master {
-    grid-template-columns: repeat(6, 68px);
-}
-
-.board.insane {
-    grid-template-columns: repeat(7, 62px);
-}
-
-.board.chaos {
-    grid-template-columns: repeat(6, 62px);
-}
-
-/* =========================
-CARD DESIGN
-========================= */
 .card {
     width: 68px;
     height: 82px;
-
-    border-radius: 18px;
-
-    background:
-        linear-gradient(145deg,
-            rgba(255, 255, 255, 0.14),
-            rgba(255, 255, 255, 0.04));
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
+    border-radius: 14px;
+    background: white;
+    color: black;
     display: flex;
-    justify-content: center;
     align-items: center;
-
-    font-size: 30px;
-
+    justify-content: center;
+    font-size: 28px;
     cursor: pointer;
-
-    user-select: none;
-
-    transition: .18s ease;
-
-    position: relative;
-
-    overflow: hidden;
 }
 
-/* shiny effect */
-.card::before {
-    content: "";
-    position: absolute;
+/* HOW TO PLAY */
+.how-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7);
+}
 
-    width: 100%;
-    height: 100%;
+.how-box {
+    width: 340px;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+}
 
-    background:
-        linear-gradient(120deg,
-            transparent,
-            rgba(255, 255, 255, .15),
-            transparent);
+.demo-board {
+    display: grid;
+    grid-template-columns: repeat(2, 70px);
+    gap: 10px;
+    justify-content: center;
+    margin: 15px 0;
+}
 
-    transform: translateX(-120%);
+.demo-card {
+    width: 70px;
+    height: 80px;
+    background: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
     transition: .4s;
 }
 
-.card:hover::before {
-    transform: translateX(120%);
-}
-
-.card:hover {
-    transform: translateY(-4px) scale(1.04);
-}
-
-.card.flipped {
-    background:
-        linear-gradient(145deg,
-            #ffffff,
-            #d4d4d8);
-
-    color: #111827;
-}
-
-.card.matched {
-    background:
-        linear-gradient(145deg,
-            #22c55e,
-            #16a34a);
-
-    color: white;
-}
-
-.card.locked {
-    pointer-events: none;
-}
-
-/* fade mechanic */
-.faded {
-    opacity: .2;
-}
-
-/* =========================
-GAME OVER
-========================= */
-#gameOver {
-    display: none;
-
-    height: 100vh;
-
-    justify-content: center;
-    align-items: center;
-}
-
-.over-box {
-    width: 360px;
-
-    background: rgba(255, 255, 255, 0.08);
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    border-radius: 24px;
-
-    padding: 35px;
-
-    text-align: center;
-
-    
-}
-
-.over-box h1 {
-    font-size: 42px;
-    margin-bottom: 20px;
-}
-
-.stats {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.stat {
-    background: rgba(255, 255, 255, 0.06);
-    border-radius: 14px;
-    padding: 12px;
-}
-
-.stat-title {
-    opacity: .7;
-    font-size: 12px;
-}
-
-.stat-value {
-    margin-top: 5px;
-    font-size: 22px;
-    font-weight: 700;
-}
-
-.over-box button {
-    margin-top: 24px;
-
-    width: 100%;
-    padding: 14px;
-
-    border: none;
-    border-radius: 14px;
-
-    background: linear-gradient(135deg, #7c3aed, #4f46e5);
-
-    color: white;
-
-    font-weight: 600;
-    cursor: pointer;
-}
-
-/* =========================
-RESPONSIVE
-========================= */
-@media(max-width: 768px) {
-
-    .hud {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .board.easy,
-    .board.normal,
-    .board.hard,
-    .board.master,
-    .board.insane,
-    .board.chaos {
-        grid-template-columns: repeat(4, 60px);
-    }
-
-    .card {
-        width: 58px;
-        height: 72px;
-        font-size: 24px;
-    }
+.demo-card.flip {
+    transform: rotateY(180deg);
 }

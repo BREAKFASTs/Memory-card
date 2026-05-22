@@ -1,355 +1,121 @@
-// =====================
-// GAME DATA
-// =====================
-const symbols = [
-  "🍎","🍌","🍇","🍓","🍉","🍍",
-  "🥝","🍒","🍑","🥥","🍋","🍊",
-  "🍐","🥭","🫐","🍈","🍏","🍅"
-];
+const symbols = ["🍎","🍌","🍇","🍓","🍉","🍍"];
 
 let board = document.getElementById("board");
-
-let score = 0;
-let pairs = 0;
-let time = 30;
-let timer;
-
 let first = null;
-let second = null;
-
 let lock = false;
-let previewing = false;
-
-let levelIndex = 0;
-let timeAddedTotal = 0;
-
-const levels = [
-  { name: "Easy", pairs: 6, reward: 5, preview: 3500, class: "easy" },
-  { name: "Normal", pairs: 8, reward: 4, preview: 2500, class: "normal" },
-  { name: "Hard", pairs: 10, reward: 4, preview: 1800, class: "hard" },
-  { name: "Master", pairs: 12, reward: 3, preview: 1200, class: "master" },
-  { name: "Insane", pairs: 14, reward: 3, preview: 700, class: "insane" },
-  { name: "Chaos", pairs: 18, reward: 2, preview: 300, class: "chaos" }
-];
 
 // =====================
 // START GAME
 // =====================
 function startGame() {
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("gameScreen").style.display = "flex";
 
-  document.getElementById("menu").style.display = "none";
-  document.getElementById("gameScreen").style.display = "flex";
-
-  loadBest();
-  setupLevel();
-  startTimer();
+    setup();
 }
 
 // =====================
-// SETUP LEVEL
+// SETUP BOARD
 // =====================
-function setupLevel() {
+function setup() {
 
-  previewing = true;
-  lock = true;
+    let arr = [];
 
-  let level = levels[levelIndex];
+    for (let i = 0; i < 3; i++) {
+        arr.push(symbols[i], symbols[i]);
+    }
 
-  document.getElementById("level").innerText = level.name;
+    arr.sort(() => Math.random() - 0.5);
 
-  // change board layout
-  board.className = "board " + level.class;
+    board.innerHTML = "";
+    board.style.gridTemplateColumns = "repeat(3, 70px)";
 
-  let arr = [];
+    arr.forEach(sym => {
+        let card = document.createElement("div");
+        card.className = "card";
+        card.innerText = "?";
+        card.dataset.value = sym;
 
-  for (let i = 0; i < level.pairs; i++) {
-    arr.push(symbols[i], symbols[i]);
-  }
-
-  arr.sort(() => Math.random() - 0.5);
-
-  board.innerHTML = "";
-
-  arr.forEach(sym => {
-
-    let card = document.createElement("div");
-
-    card.classList.add("card");
-    card.innerText = sym;
-    card.dataset.value = sym;
-
-    board.appendChild(card);
-
-    card.addEventListener("click", flip);
-  });
-
-  // PREVIEW LOCK FIX
-  setTimeout(() => {
-
-    document.querySelectorAll(".card").forEach(card => {
-      card.innerText = "?";
+        card.onclick = flip;
+        board.appendChild(card);
     });
-
-    previewing = false;
-    lock = false;
-
-  }, level.preview);
 }
 
 // =====================
-// FLIP CARD
+// FLIP LOGIC
 // =====================
 function flip() {
 
-  // FIX PREVIEW CLICK BUG
-  if (previewing) return;
+    if (lock) return;
+    if (this === first) return;
 
-  if (lock) return;
+    this.innerText = this.dataset.value;
 
-  if (this === first) return;
+    if (!first) {
+        first = this;
+    } else {
 
-  if (this.classList.contains("matched")) return;
+        lock = true;
 
-  this.classList.add("flipped");
-  this.innerText = this.dataset.value;
+        if (first.dataset.value === this.dataset.value) {
+            first = null;
+            lock = false;
+        } else {
 
-  if (!first) {
-
-    first = this;
-
-  } else {
-
-    second = this;
-    lock = true;
-
-    checkMatch();
-  }
+            setTimeout(() => {
+                first.innerText = "?";
+                this.innerText = "?";
+                first = null;
+                lock = false;
+            }, 600);
+        }
+    }
 }
 
 // =====================
-// CHECK MATCH
+// HOW TO PLAY
 // =====================
-function checkMatch() {
+function showHowToPlay() {
+    document.getElementById("howModal").style.display = "flex";
+    runDemo();
+}
 
-  if (first.dataset.value === second.dataset.value) {
+function closeHowToPlay() {
+    document.getElementById("howModal").style.display = "none";
+}
 
-    first.classList.add("matched");
-    second.classList.add("matched");
+// =====================
+// DEMO ANIMATION
+// =====================
+function runDemo() {
 
-    score += 10;
-    pairs++;
+    let cards = document.querySelectorAll(".demo-card");
+    let text = document.getElementById("stepText");
 
-    let reward = levels[levelIndex].reward;
-
-    time += reward;
-    timeAddedTotal += reward;
-
-    updateUI();
-
-    resetTurn();
-
-    checkLevelUp();
-
-  } else {
+    cards.forEach(c => c.classList.remove("flip"));
+    text.innerText = "Memorize the cards";
 
     setTimeout(() => {
 
-      first.classList.remove("flipped");
-      second.classList.remove("flipped");
+        text.innerText = "Cards are hidden. Find pairs!";
 
-      first.innerText = "?";
-      second.innerText = "?";
+        cards.forEach(c => {
+            c.innerText = "?";
+            c.classList.add("flip");
+        });
 
-      resetTurn();
-
-    }, 650);
-  }
-}
-
-// =====================
-// LEVEL UP
-// =====================
-function checkLevelUp() {
-
-  if (pairs % 6 === 0 && levelIndex < levels.length - 1) {
-
-    levelIndex++;
+    }, 2000);
 
     setTimeout(() => {
-      setupLevel();
-    }, 500);
-  }
 
-  if (pairs % 4 === 0) {
-    shuffleCards();
-  }
+        text.innerText = "Match identical pairs!";
 
-  if (pairs % 5 === 0) {
-    fadeCards();
-  }
-}
+        cards[0].innerText = "🍎";
+        cards[1].innerText = "🍌";
+        cards[2].innerText = "🍎";
+        cards[3].innerText = "🍌";
 
-// =====================
-// SMOOTH SHUFFLE
-// =====================
-function shuffleCards() {
+        cards.forEach(c => c.classList.remove("flip"));
 
-  lock = true;
-
-  let cards = Array.from(document.querySelectorAll(".card"));
-
-  // add shuffle animation
-  cards.forEach((card, index) => {
-
-    card.style.transition =
-      "transform .45s ease, opacity .45s ease";
-
-    // random movement
-    let x = (Math.random() * 80) - 40;
-    let y = (Math.random() * 80) - 40;
-    let rotate = (Math.random() * 30) - 15;
-
-    card.style.transform =
-      `translate(${x}px, ${y}px) rotate(${rotate}deg) scale(.7)`;
-
-    card.style.opacity = "0";
-  });
-
-  // after animation
-  setTimeout(() => {
-
-    // shuffle array
-    cards.sort(() => Math.random() - 0.5);
-
-    board.innerHTML = "";
-
-    cards.forEach(card => {
-
-      // reset before adding back
-      card.style.transform =
-        "translate(0px, 0px) rotate(0deg) scale(.5)";
-
-      card.style.opacity = "0";
-
-      board.appendChild(card);
-
-      // force browser repaint
-      card.offsetHeight;
-
-      // smooth pop in
-      card.style.transform =
-        "translate(0px, 0px) rotate(0deg) scale(1)";
-
-      card.style.opacity = "1";
-    });
-
-    setTimeout(() => {
-      lock = false;
-    }, 450);
-
-  }, 450);
-}
-// =====================
-// FADE EFFECT
-// =====================
-function fadeCards() {
-
-  document.querySelectorAll(".card").forEach(card => {
-
-    if (!card.classList.contains("matched")) {
-
-      card.classList.add("faded");
-
-      setTimeout(() => {
-        card.classList.remove("faded");
-      }, 1000);
-    }
-  });
-}
-
-// =====================
-// TIMER
-// =====================
-function startTimer() {
-
-  timer = setInterval(() => {
-
-    time--;
-
-    updateUI();
-
-    // timer warning
-    if (time <= 10) {
-      document.querySelector(".timer-box").style.transform = "scale(1.05)";
-    }
-
-    if (time <= 0) {
-      endGame();
-    }
-
-  }, 1000);
-}
-
-// =====================
-// UPDATE UI
-// =====================
-function updateUI() {
-
-  document.getElementById("score").innerText = score;
-  document.getElementById("pairs").innerText = pairs;
-  document.getElementById("time").innerText = time;
-}
-
-// =====================
-// RESET TURN
-// =====================
-function resetTurn() {
-
-  first = null;
-  second = null;
-  lock = false;
-}
-
-// =====================
-// BEST SCORE
-// =====================
-function loadBest() {
-
-  let best = localStorage.getItem("best") || 0;
-
-  document.getElementById("best").innerText = best;
-}
-
-function saveBest() {
-
-  let best = localStorage.getItem("best") || 0;
-
-  if (score > best) {
-    localStorage.setItem("best", score);
-  }
-}
-
-// =====================
-// GAME OVER
-// =====================
-function endGame() {
-
-  clearInterval(timer);
-
-  saveBest();
-
-  document.getElementById("gameScreen").style.display = "none";
-  document.getElementById("gameOver").style.display = "flex";
-
-  document.getElementById("finalScore").innerText = score;
-  document.getElementById("finalPairs").innerText = pairs;
-  document.getElementById("finalLevel").innerText = levels[levelIndex].name;
-  document.getElementById("finalTime").innerText = timeAddedTotal;
-}
-
-// =====================
-// RESTART
-// =====================
-function restart() {
-  location.reload();
+    }, 4500);
 }
